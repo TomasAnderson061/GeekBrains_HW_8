@@ -176,7 +176,7 @@ ShowArray(resultarray);
 26(1,0,1) 55(1,1,1)
 */
 
-/*int [,,] Create3DArray(int rows, int cols, int pages, int min, int max){
+int [,,] Create3DArray(int rows, int cols, int pages, int min, int max){
     int [,,] array = new int [rows, cols, pages];
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++)
