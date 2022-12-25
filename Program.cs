@@ -158,7 +158,7 @@ int max= Convert.ToInt32(Console.ReadLine());
 int [,] array1= Create2DArray(m,n,min,max);
 int [,] array2= Create2DArray(m,n,min,max);
 int [,] resultarray = new int [m, n];
-Console.WriteLine("Произведение массивов:");
+Console.WriteLine("Произведение матриц:");
 ShowArray(array1);
 Console.WriteLine("И");
 ShowArray(array2);
