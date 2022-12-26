@@ -125,46 +125,63 @@ MinSumOfRow(array);
 18 20
 15 18
 */
-int [,] Create2DArray(int rows, int cols, int min, int max){
-    int [,] array = new int [rows, cols];
-    for(int i=0; i<rows; i++){
-        for(int j=0; j<cols; j++)
-            array[i,j]=new Random().Next(min, max+1);          
+ int[,] GetArrayFromUser(string name)
+    {
+        Console.Write("Количество строк матрицы {0}: ", name);
+        int n = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Количество столбцов матрицы {0}: ", name);
+        int m = Convert.ToInt32(Console.ReadLine());
+
+        int [,] array = new int[n, m];
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < m; j++)
+            {
+                Console.Write("{0}[{1},{2}] = ", name, i, j);
+                array[i, j] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+        return array;
     }
-    return array;
-}
+    int[,] ArrayMultiply(int[,] array1, int[,] array2){ 
+        if (array1.GetLength(1) != array2.GetLength(0))
+            Console.WriteLine("Умножение не возможно! Количество столбцов первой матрицы не равно количеству строк второй матрицы");
+        
+        int [,] array3 = new int[array1.GetLength(0), array2.GetLength(1)];
+        for (int i = 0; i < array1.GetLength(0); i++){
+            for (int j = 0; j < array2.GetLength(1); j++){
+                array3[i, j] = 0;
+                    for (var k = 0; k < array1.GetLength(1); k++)
+                        array3[i, j] += array1[i, k] * array2[k, j];               
+            }
+        }
+        return array3;
+    }
+
 void ShowArray(int [,] array){
     for(int i=0; i<array.GetLength(0); i++){
         for(int j=0; j<array.GetLength(1); j++)
-            Console.Write(array[i,j] + " ");
+            Console.Write(array[i,j].ToString().PadLeft(4));
         Console.WriteLine();
-      
-    }  
+    }
 }
 
-void MultyplyOfArray(int [,] resultarray, int [,] array1, int [,] array2){
-    resultarray[0,0]=array1[0,0]*array2[0,0]+array1[0,1]*array2[1,0];
-    resultarray[0,1]=array1[0,0]*array2[0,1]+array1[0,1]*array2[1,1];
-    resultarray[1,0]=array1[1,0]*array2[0,0]+array1[1,1]*array2[1,0];
-    resultarray[1,1]=array1[1,0]*array2[0,1]+array1[1,1]*array2[1,1];
-}
-int m=2;
-int n=2;
-Console.WriteLine("Умножение 2-х матриц размером 2х2 элементов");
-Console.Write("Введите min элементов: ");
-int min= Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите max элементов: ");
-int max= Convert.ToInt32(Console.ReadLine());
-int [,] array1= Create2DArray(m,n,min,max);
-int [,] array2= Create2DArray(m,n,min,max);
-int [,] resultarray = new int [m, n];
-Console.WriteLine("Произведение матриц:");
-ShowArray(array1);
-Console.WriteLine("И");
-ShowArray(array2);
-Console.WriteLine("равно:");
-MultyplyOfArray(resultarray, array1, array2);
-ShowArray(resultarray);
+        Console.WriteLine("Программа для умножения матриц");
+
+        int [,] arrayA = GetArrayFromUser("A");
+        int [,] arrayB = GetArrayFromUser("B");
+
+        Console.WriteLine("Матрица A:");
+        ShowArray(arrayA);
+
+        Console.WriteLine("Матрица B:");
+        ShowArray(arrayB);
+
+        int [,] arrayC = ArrayMultiply(arrayA, arrayB);
+        Console.WriteLine("Произведение матриц:");
+        ShowArray(arrayC);
+
+        Console.ReadLine();
+
 
 
 /*Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
