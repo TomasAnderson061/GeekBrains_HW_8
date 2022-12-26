@@ -165,7 +165,7 @@ void ShowArray(int [,] array){
     }
 }
 
-        Console.WriteLine("Программа для умножения матриц");
+        Console.WriteLine("Умножение матриц");
 
         int [,] arrayA = GetArrayFromUser("A");
         int [,] arrayB = GetArrayFromUser("B");
